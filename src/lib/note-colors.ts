@@ -2,6 +2,7 @@ export type NoteColor = {
   value: string | null;
   label: string;
   cardClass: string;
+  cardHoverClass: string;
   swatchClass: string;
 };
 
@@ -9,42 +10,60 @@ export const NOTE_COLORS: NoteColor[] = [
   {
     value: null,
     label: "Белый",
-    cardClass: "bg-white",
-    swatchClass: "border border-zinc-300 bg-white",
+    cardClass: "bg-surface",
+    cardHoverClass: "hover:bg-hover-bg",
+    swatchClass: "border border-line-strong bg-surface",
   },
   {
-    value: "#fef3c7",
+    value: "#fff4b8",
     label: "Жёлтый",
-    cardClass: "bg-[#fef3c7]",
-    swatchClass: "border border-zinc-300 bg-[#fef3c7]",
+    cardClass: "bg-note-yellow",
+    cardHoverClass: "hover:bg-note-yellow-hover",
+    swatchClass: "border border-black/10 bg-note-yellow",
   },
   {
-    value: "#d1fadf",
+    value: "#d7f5d0",
     label: "Зелёный",
-    cardClass: "bg-[#d1fadf]",
-    swatchClass: "border border-zinc-300 bg-[#d1fadf]",
+    cardClass: "bg-note-green",
+    cardHoverClass: "hover:bg-note-green-hover",
+    swatchClass: "border border-black/10 bg-note-green",
   },
   {
-    value: "#dbeafe",
+    value: "#d9f0ff",
     label: "Голубой",
-    cardClass: "bg-[#dbeafe]",
-    swatchClass: "border border-zinc-300 bg-[#dbeafe]",
+    cardClass: "bg-note-blue",
+    cardHoverClass: "hover:bg-note-blue-hover",
+    swatchClass: "border border-black/10 bg-note-blue",
   },
   {
-    value: "#fce7f3",
+    value: "#e9d7ff",
+    label: "Фиолетовый",
+    cardClass: "bg-note-purple",
+    cardHoverClass: "hover:bg-note-purple-hover",
+    swatchClass: "border border-black/10 bg-note-purple",
+  },
+  {
+    value: "#ffd9e2",
     label: "Розовый",
-    cardClass: "bg-[#fce7f3]",
-    swatchClass: "border border-zinc-300 bg-[#fce7f3]",
+    cardClass: "bg-note-pink",
+    cardHoverClass: "hover:bg-note-pink-hover",
+    swatchClass: "border border-black/10 bg-note-pink",
   },
   {
-    value: "#e5e7eb",
-    label: "Серый",
-    cardClass: "bg-[#e5e7eb]",
-    swatchClass: "border border-zinc-300 bg-[#e5e7eb]",
+    value: "#ffe0b2",
+    label: "Оранжевый",
+    cardClass: "bg-note-orange",
+    cardHoverClass: "hover:bg-note-orange-hover",
+    swatchClass: "border border-black/10 bg-note-orange",
   },
 ];
 
 export function noteCardClass(color: string | null | undefined): string {
   const match = NOTE_COLORS.find((c) => c.value === color);
-  return match?.cardClass ?? "bg-white";
+  return match?.cardClass ?? "bg-surface";
+}
+
+export function noteCardHoverClass(color: string | null | undefined): string {
+  const match = NOTE_COLORS.find((c) => c.value === color);
+  return match?.cardHoverClass ?? "hover:bg-hover-bg";
 }

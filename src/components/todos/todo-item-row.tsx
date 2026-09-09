@@ -36,34 +36,34 @@ export function TodoItemRow({
 
   if (editing) {
     return (
-      <li className="rounded border border-zinc-300 bg-white p-3 shadow-sm">
+      <li className="rounded border border-line bg-surface p-3 shadow-card">
         <form action={updateFormAction} className="space-y-2">
           <input type="hidden" name="id" value={item.id} />
           <input
             name="text"
             type="text"
             defaultValue={item.text}
-            className="w-full rounded border border-zinc-300 px-3 py-2 text-sm"
+            className="w-full rounded border border-line-strong bg-surface px-3 py-2 text-sm text-foreground focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
           />
           {updateState?.fieldErrors?.text && (
-            <p className="text-sm text-red-600">{updateState.fieldErrors.text.join(", ")}</p>
+            <p className="text-sm text-danger">{updateState.fieldErrors.text.join(", ")}</p>
           )}
           <div className="flex items-center gap-2">
             <button
               type="submit"
               disabled={updatePending}
-              className="rounded bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white disabled:opacity-50"
+              className="rounded bg-brand px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-brand-hover active:bg-brand-pressed disabled:bg-divider disabled:text-subtle"
             >
               {updatePending ? "Сохранение..." : "Сохранить"}
             </button>
             <button
               type="button"
               onClick={() => setEditing(false)}
-              className="rounded border border-zinc-300 px-3 py-1.5 text-sm"
+              className="rounded border border-line-strong bg-surface px-3 py-1.5 text-sm text-muted transition-colors hover:bg-hover-bg hover:text-foreground"
             >
               Отмена
             </button>
-            {updateState?.error && <p className="text-sm text-red-600">{updateState.error}</p>}
+            {updateState?.error && <p className="text-sm text-danger">{updateState.error}</p>}
           </div>
         </form>
       </li>
@@ -72,8 +72,8 @@ export function TodoItemRow({
 
   return (
     <li
-      className={`rounded border p-3 shadow-sm ${
-        item.isDone ? "border-zinc-200 bg-zinc-50" : "border-zinc-300 bg-white"
+      className={`rounded border p-3 shadow-card transition-colors ${
+        item.isDone ? "border-divider bg-hover-bg" : "border-line bg-surface"
       }`}
     >
       <div className="flex items-center gap-3">
@@ -82,12 +82,12 @@ export function TodoItemRow({
           checked={item.isDone}
           onChange={handleToggle}
           disabled={transitionPending || readonly}
-          className="h-4 w-4 shrink-0"
           aria-label="Отметить выполненной"
+          className="h-4 w-4 shrink-0 cursor-pointer accent-brand"
         />
         <span
           className={`flex-1 break-words text-sm ${
-            item.isDone ? "text-zinc-400 line-through" : "text-zinc-800"
+            item.isDone ? "text-subtle line-through" : "text-todo-text"
           }`}
         >
           {item.text}
@@ -99,7 +99,7 @@ export function TodoItemRow({
             onClick={onMoveUp}
             disabled={!canMoveUp}
             aria-label="Выше"
-            className="rounded border border-zinc-300 px-2 py-1 text-xs disabled:opacity-30"
+            className="rounded border border-line-strong px-2 py-1 text-xs text-muted transition-colors hover:bg-hover-bg hover:text-foreground disabled:opacity-30"
           >
             ↑
           </button>
@@ -108,14 +108,14 @@ export function TodoItemRow({
             onClick={onMoveDown}
             disabled={!canMoveDown}
             aria-label="Ниже"
-            className="rounded border border-zinc-300 px-2 py-1 text-xs disabled:opacity-30"
+            className="rounded border border-line-strong px-2 py-1 text-xs text-muted transition-colors hover:bg-hover-bg hover:text-foreground disabled:opacity-30"
           >
             ↓
           </button>
           <button
             type="button"
             onClick={() => setEditing(true)}
-            className="rounded border border-zinc-300 px-2 py-1 text-xs"
+            className="rounded border border-line-strong px-2 py-1 text-xs text-muted transition-colors hover:bg-hover-bg hover:text-foreground"
           >
             Изменить
           </button>
@@ -129,7 +129,7 @@ export function TodoItemRow({
                   event.preventDefault();
                 }
               }}
-              className="rounded border border-red-200 px-2 py-1 text-xs text-red-700 hover:bg-red-50 disabled:opacity-50"
+              className="rounded border border-danger/30 px-2 py-1 text-xs text-danger transition-colors hover:bg-danger-bg disabled:opacity-50"
             >
               Удалить
             </button>
@@ -137,7 +137,7 @@ export function TodoItemRow({
           </div>
         )}
       </div>
-      {deleteState?.error && <p className="mt-2 text-sm text-red-600">{deleteState.error}</p>}
+      {deleteState?.error && <p className="mt-2 text-sm text-danger">{deleteState.error}</p>}
     </li>
   );
 }

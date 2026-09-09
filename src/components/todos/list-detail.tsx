@@ -59,31 +59,31 @@ export function ListDetail({
               name="title"
               type="text"
               defaultValue={list.title}
-              className="flex-1 rounded border border-zinc-300 px-3 py-2 text-lg"
+              className="flex-1 rounded border border-line-strong bg-surface px-3 py-2 text-lg text-foreground focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
             />
             <button
               type="submit"
               disabled={updateListPending}
-              className="rounded bg-zinc-900 px-3 py-2 text-sm font-medium text-white disabled:opacity-50"
+              className="rounded bg-brand px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-brand-hover active:bg-brand-pressed disabled:bg-divider disabled:text-subtle"
             >
               {updateListPending ? "Сохранение..." : "Сохранить"}
             </button>
             <button
               type="button"
               onClick={() => setEditingTitle(false)}
-              className="rounded border border-zinc-300 px-3 py-2 text-sm"
+              className="rounded border border-line-strong bg-surface px-3 py-2 text-sm text-muted transition-colors hover:bg-hover-bg hover:text-foreground"
             >
               Отмена
             </button>
           </form>
         ) : (
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-semibold">{list.title}</h1>
+            <h1 className="text-2xl font-semibold text-foreground">{list.title}</h1>
             {isOwner && (
               <button
                 type="button"
                 onClick={() => setEditingTitle(true)}
-                className="rounded border border-zinc-300 px-3 py-1.5 text-sm"
+                className="rounded border border-line-strong bg-surface px-3 py-1.5 text-sm text-muted transition-colors hover:bg-hover-bg hover:text-foreground"
               >
                 Переименовать
               </button>
@@ -101,15 +101,15 @@ export function ListDetail({
                   event.preventDefault();
                 }
               }}
-              className="rounded border border-red-200 px-3 py-1.5 text-sm text-red-700 hover:bg-red-50 disabled:opacity-50"
+              className="rounded border border-danger/30 px-3 py-1.5 text-sm text-danger transition-colors hover:bg-danger-bg disabled:opacity-50"
             >
               Удалить список
             </button>
           </form>
         )}
       </div>
-      {updateListState?.error && <p className="mt-2 text-sm text-red-600">{updateListState.error}</p>}
-      {deleteListState?.error && <p className="mt-2 text-sm text-red-600">{deleteListState.error}</p>}
+      {updateListState?.error && <p className="mt-2 text-sm text-danger">{updateListState.error}</p>}
+      {deleteListState?.error && <p className="mt-2 text-sm text-danger">{deleteListState.error}</p>}
 
       {canEdit && (
         <section className="mt-6" aria-label="Новая задача">
@@ -119,25 +119,25 @@ export function ListDetail({
               name="text"
               type="text"
               placeholder="Новая задача..."
-              className="flex-1 rounded border border-zinc-300 px-3 py-2 text-sm"
+              className="flex-1 rounded border border-line-strong bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
             />
             <button
               type="submit"
               disabled={addPending}
-              className="rounded bg-zinc-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+              className="rounded bg-brand px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-brand-hover active:bg-brand-pressed disabled:bg-divider disabled:text-subtle"
             >
               {addPending ? "Добавление..." : "Добавить"}
             </button>
           </form>
           {addState?.fieldErrors?.text && (
-            <p className="mt-2 text-sm text-red-600">{addState.fieldErrors.text.join(", ")}</p>
+            <p className="mt-2 text-sm text-danger">{addState.fieldErrors.text.join(", ")}</p>
           )}
-          {addState?.error && <p className="mt-2 text-sm text-red-600">{addState.error}</p>}
+          {addState?.error && <p className="mt-2 text-sm text-danger">{addState.error}</p>}
         </section>
       )}
 
       {sortedItems.length === 0 ? (
-        <p className="mt-8 text-zinc-500">В списке пока нет задач.</p>
+        <p className="mt-8 text-muted">В списке пока нет задач.</p>
       ) : (
         <ul className="mt-4 space-y-2">
           {sortedItems.map((item, index) => (
@@ -153,7 +153,7 @@ export function ListDetail({
           ))}
         </ul>
       )}
-      {transitionPending && <p className="mt-4 text-sm text-zinc-500">Сохранение порядка...</p>}
+      {transitionPending && <p className="mt-4 text-sm text-muted">Сохранение порядка...</p>}
 
       <MembersPanel listId={list.id} members={members} canManage={isOwner} />
     </div>

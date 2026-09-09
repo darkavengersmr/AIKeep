@@ -6,8 +6,13 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
   if (user) redirect("/");
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-50 px-4 py-16">
-      <div className="w-full max-w-md rounded-lg border bg-white p-6 shadow-sm">{children}</div>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4 py-16">
+      <div className="relative mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-brand shadow-fab">
+        <span className="h-4 w-4 rounded-sm bg-foreground/80" aria-hidden="true" />
+      </div>
+      <div className="w-full max-w-md rounded-xl border border-line bg-surface p-6 shadow-card">
+        {children}
+      </div>
     </div>
   );
 }

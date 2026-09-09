@@ -43,11 +43,11 @@ function CreateInviteCodeForm() {
   useFormToast(state);
 
   return (
-    <form action={action} className="rounded-lg border border-zinc-300 bg-white p-4 shadow-sm">
-      <h2 className="text-base font-semibold">Новый код</h2>
+    <form action={action} className="rounded-lg border border-line bg-surface p-4 shadow-card">
+      <h2 className="text-base font-semibold text-foreground">Новый код</h2>
       <div className="mt-3 grid gap-3 sm:grid-cols-3">
         <div className="space-y-1">
-          <label htmlFor="code" className="text-sm font-medium">
+          <label htmlFor="code" className="text-sm font-medium text-foreground">
             Код
           </label>
           <input
@@ -55,14 +55,14 @@ function CreateInviteCodeForm() {
             name="code"
             type="text"
             placeholder="Сгенерировать автоматически"
-            className="w-full rounded border border-zinc-300 px-3 py-2 text-sm"
+            className="w-full rounded border border-line-strong bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
           />
           {state?.fieldErrors?.code && (
-            <p className="text-sm text-red-600">{state.fieldErrors.code.join(", ")}</p>
+            <p className="text-sm text-danger">{state.fieldErrors.code.join(", ")}</p>
           )}
         </div>
         <div className="space-y-1">
-          <label htmlFor="maxUses" className="text-sm font-medium">
+          <label htmlFor="maxUses" className="text-sm font-medium text-foreground">
             Лимит использований
           </label>
           <input
@@ -71,24 +71,24 @@ function CreateInviteCodeForm() {
             type="number"
             min={1}
             placeholder="Без лимита"
-            className="w-full rounded border border-zinc-300 px-3 py-2 text-sm"
+            className="w-full rounded border border-line-strong bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
           />
           {state?.fieldErrors?.maxUses && (
-            <p className="text-sm text-red-600">{state.fieldErrors.maxUses.join(", ")}</p>
+            <p className="text-sm text-danger">{state.fieldErrors.maxUses.join(", ")}</p>
           )}
         </div>
         <div className="space-y-1">
-          <label htmlFor="expiresAt" className="text-sm font-medium">
+          <label htmlFor="expiresAt" className="text-sm font-medium text-foreground">
             Срок действия
           </label>
           <input
             id="expiresAt"
             name="expiresAt"
             type="datetime-local"
-            className="w-full rounded border border-zinc-300 px-3 py-2 text-sm"
+            className="w-full rounded border border-line-strong bg-surface px-3 py-2 text-sm text-foreground focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
           />
           {state?.fieldErrors?.expiresAt && (
-            <p className="text-sm text-red-600">{state.fieldErrors.expiresAt.join(", ")}</p>
+            <p className="text-sm text-danger">{state.fieldErrors.expiresAt.join(", ")}</p>
           )}
         </div>
       </div>
@@ -96,11 +96,11 @@ function CreateInviteCodeForm() {
         <button
           type="submit"
           disabled={pending}
-          className="rounded bg-zinc-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+          className="rounded bg-brand px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-brand-hover active:bg-brand-pressed disabled:bg-divider disabled:text-subtle"
         >
           {pending ? "Создание..." : "Создать код"}
         </button>
-        {state?.error && <p className="text-sm text-red-600">{state.error}</p>}
+        {state?.error && <p className="text-sm text-danger">{state.error}</p>}
       </div>
     </form>
   );
@@ -122,23 +122,23 @@ function InviteCodeRow({ code }: { code: InvitationCode }) {
     code.maxUses === null ? "Без лимита" : `Лимит ${code.maxUses}`;
 
   return (
-    <li className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-zinc-300 bg-white p-4 shadow-sm">
+    <li className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-line bg-surface p-4 shadow-card">
       <div className="min-w-0">
         <div className="flex flex-wrap items-center gap-2">
-          <code className="rounded bg-zinc-100 px-2 py-0.5 font-mono text-sm font-semibold">
+          <code className="rounded bg-hover-bg px-2 py-0.5 font-mono text-sm font-semibold text-foreground">
             {code.code}
           </code>
           <span
             className={`rounded px-2 py-0.5 text-xs font-medium ${
               code.isActive
-                ? "bg-green-50 text-green-700"
-                : "bg-zinc-100 text-zinc-500"
+                ? "bg-success-bg text-success"
+                : "bg-hover-bg text-subtle"
             }`}
           >
             {code.isActive ? "Активен" : "Отключён"}
           </span>
         </div>
-        <p className="mt-1 text-xs text-zinc-500">
+        <p className="mt-1 text-xs text-muted">
           Использовано {code.useCount} из {maxUsesLabel} · {formatDate(code.expiresAt)} · создан{" "}
           {new Intl.DateTimeFormat("ru-RU", { dateStyle: "short" }).format(new Date(code.createdAt))}
         </p>
@@ -149,7 +149,7 @@ function InviteCodeRow({ code }: { code: InvitationCode }) {
           <button
             type="submit"
             disabled={togglePending}
-            className="rounded border border-zinc-300 px-3 py-1.5 text-sm disabled:opacity-50"
+            className="rounded border border-line-strong bg-surface px-3 py-1.5 text-sm text-muted transition-colors hover:bg-hover-bg hover:text-foreground disabled:opacity-50"
           >
             {togglePending ? "..." : code.isActive ? "Отключить" : "Включить"}
           </button>
@@ -164,14 +164,14 @@ function InviteCodeRow({ code }: { code: InvitationCode }) {
                 event.preventDefault();
               }
             }}
-            className="rounded border border-red-200 px-3 py-1.5 text-sm text-red-700 hover:bg-red-50 disabled:opacity-50"
+            className="rounded border border-danger/30 px-3 py-1.5 text-sm text-danger transition-colors hover:bg-danger-bg disabled:opacity-50"
           >
             Удалить
           </button>
         </form>
       </div>
-      {toggleState?.error && <p className="w-full text-sm text-red-600">{toggleState.error}</p>}
-      {deleteState?.error && <p className="w-full text-sm text-red-600">{deleteState.error}</p>}
+      {toggleState?.error && <p className="w-full text-sm text-danger">{toggleState.error}</p>}
+      {deleteState?.error && <p className="w-full text-sm text-danger">{deleteState.error}</p>}
     </li>
   );
 }

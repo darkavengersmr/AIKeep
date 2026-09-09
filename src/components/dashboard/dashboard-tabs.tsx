@@ -16,7 +16,7 @@ export function parseDashboardTab(value: string | string[] | undefined): Dashboa
 
 export function DashboardTabs({ active }: { active: DashboardTab }) {
   return (
-    <nav aria-label="Разделы" className="flex gap-1 overflow-x-auto rounded-lg border border-zinc-200 bg-zinc-100 p-1">
+    <nav aria-label="Разделы" className="flex gap-1 overflow-x-auto rounded-lg border border-line bg-hover-bg p-1">
       {DASHBOARD_TABS.map((tab) => {
         const isActive = tab.id === active;
         return (
@@ -24,10 +24,10 @@ export function DashboardTabs({ active }: { active: DashboardTab }) {
             key={tab.id}
             href={tab.href}
             aria-current={isActive ? "page" : undefined}
-            className={`whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium ${
+            className={`whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors ${
               isActive
-                ? "bg-white text-zinc-900 shadow-sm"
-                : "text-zinc-600 hover:text-zinc-900"
+                ? "bg-surface text-foreground shadow-sm"
+                : "text-muted hover:text-foreground"
             }`}
           >
             {tab.label}

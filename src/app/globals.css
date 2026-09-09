@@ -1,26 +1,81 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  /* Base palette (Google Keep style) */
+  --color-background: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-foreground: #202124;
+  --color-muted: #5f6368;
+  --color-subtle: #9aa0a6;
+  --color-hover-bg: #f1f3f4;
+  --color-line: #e0e3e7;
+  --color-line-strong: #dadce0;
+  --color-divider: #e8eaed;
+
+  /* Brand yellow */
+  --color-brand: #f9c74f;
+  --color-brand-hover: #f6b93b;
+  --color-brand-pressed: #e9a928;
+  --color-brand-soft: #fff4cc;
+  --color-brand-decor: #fff8e1;
+  --color-brand-dark: #d99a00;
+
+  /* Note colors */
+  --color-note-yellow: #fff4b8;
+  --color-note-yellow-hover: #ffee91;
+  --color-note-green: #d7f5d0;
+  --color-note-green-hover: #c4edba;
+  --color-note-blue: #d9f0ff;
+  --color-note-blue-hover: #c5e8fc;
+  --color-note-purple: #e9d7ff;
+  --color-note-purple-hover: #dfc8fa;
+  --color-note-pink: #ffd9e2;
+  --color-note-pink-hover: #ffc7d4;
+  --color-note-orange: #ffe0b2;
+  --color-note-orange-hover: #ffd19a;
+
+  /* Todo lists */
+  --color-todo-text: #3c4043;
+  --color-checkbox-line: #9aa0a6;
+  --color-checkbox-hover-bg: #fff8e1;
+
+  /* Status */
+  --color-success: #137333;
+  --color-success-strong: #0d652d;
+  --color-success-bg: #e6f4ea;
+  --color-danger: #d93025;
+  --color-danger-bg: #fce8e6;
+  --color-warning: #b06000;
+  --color-warning-bg: #fef7e0;
+  --color-info: #1967d2;
+  --color-info-bg: #e8f0fe;
+
+  /* Tags / categories */
+  --color-tag-work-bg: #d9f0ff;
+  --color-tag-work: #1967d2;
+  --color-tag-personal-bg: #e9d7ff;
+  --color-tag-personal: #8430ce;
+  --color-tag-important-bg: #ffd9e2;
+  --color-tag-important: #c5221f;
+  --color-tag-ideas-bg: #fff4b8;
+  --color-tag-ideas: #b06000;
+  --color-tag-study-bg: #d7f5d0;
+  --color-tag-study: #137333;
+  --color-tag-shopping-bg: #ffe0b2;
+  --color-tag-shopping: #b06000;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 0.08);
+  --shadow-fab: 0 2px 6px rgb(0 0 0 / 0.12);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-background);
+  color: var(--color-foreground);
   font-family: Arial, Helvetica, sans-serif;
 }

@@ -25,8 +25,8 @@ export function MembersPanel({
 
   return (
     <section className="mt-8" aria-label="Участники списка">
-      <h2 className="text-lg font-semibold">Участники</h2>
-      <div className="mt-3 rounded-lg border border-zinc-300 bg-white p-4 shadow-sm">
+      <h2 className="text-lg font-semibold text-foreground">Участники</h2>
+      <div className="mt-3 rounded-lg border border-line bg-surface p-4 shadow-card">
         <ul className="space-y-2">
           {members.map((member) => (
             <MemberRow key={member.id} member={member} listId={listId} canManage={canManage} />
@@ -37,27 +37,27 @@ export function MembersPanel({
           <>
             <form
               action={addAction}
-              className="mt-4 flex items-center gap-2 border-t border-zinc-200 pt-4"
+              className="mt-4 flex items-center gap-2 border-t border-divider pt-4"
             >
               <input type="hidden" name="listId" value={listId} />
               <input
                 name="email"
                 type="email"
                 placeholder="Email участника"
-                className="flex-1 rounded border border-zinc-300 px-3 py-2 text-sm"
+                className="flex-1 rounded border border-line-strong bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
               />
               <button
                 type="submit"
                 disabled={addPending}
-                className="rounded bg-zinc-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+                className="rounded bg-brand px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-brand-hover active:bg-brand-pressed disabled:bg-divider disabled:text-subtle"
               >
                 {addPending ? "Добавление..." : "Добавить"}
               </button>
             </form>
             {addState?.fieldErrors?.email && (
-              <p className="mt-2 text-sm text-red-600">{addState.fieldErrors.email.join(", ")}</p>
+              <p className="mt-2 text-sm text-danger">{addState.fieldErrors.email.join(", ")}</p>
             )}
-            {addState?.error && <p className="mt-2 text-sm text-red-600">{addState.error}</p>}
+            {addState?.error && <p className="mt-2 text-sm text-danger">{addState.error}</p>}
           </>
         )}
       </div>
@@ -81,11 +81,11 @@ function MemberRow({
   return (
     <li className="flex items-center justify-between gap-3">
       <div className="min-w-0">
-        <p className="truncate text-sm font-medium">{member.displayName}</p>
-        {member.email && <p className="truncate text-xs text-zinc-500">{member.email}</p>}
+        <p className="truncate text-sm font-medium text-foreground">{member.displayName}</p>
+        {member.email && <p className="truncate text-xs text-muted">{member.email}</p>}
       </div>
       <div className="flex shrink-0 items-center gap-2">
-        <span className="rounded bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600">
+        <span className="rounded bg-hover-bg px-2 py-0.5 text-xs text-muted">
           {ROLE_LABELS[member.role]}
         </span>
         {canManage && !isOwner && (
@@ -100,14 +100,14 @@ function MemberRow({
                   event.preventDefault();
                 }
               }}
-              className="rounded border border-red-200 px-2 py-1 text-xs text-red-700 hover:bg-red-50 disabled:opacity-50"
+              className="rounded border border-danger/30 px-2 py-1 text-xs text-danger transition-colors hover:bg-danger-bg disabled:opacity-50"
             >
               Удалить
             </button>
           </form>
         )}
       </div>
-      {removeState?.error && <p className="text-xs text-red-600">{removeState.error}</p>}
+      {removeState?.error && <p className="text-xs text-danger">{removeState.error}</p>}
     </li>
   );
 }

@@ -32,17 +32,17 @@ export function ListsSection({
         <li key={list.id}>
           <Link
             href={`/lists/${list.id}`}
-            className="block rounded-lg border border-zinc-300 bg-white p-4 shadow-sm hover:shadow-md"
+            className="block rounded-lg border border-line bg-surface p-4 shadow-card transition-shadow hover:shadow-md"
           >
             <div className="flex items-start justify-between gap-2">
-              <h3 className="font-semibold">{list.title}</h3>
+              <h3 className="font-semibold text-foreground">{list.title}</h3>
               {list.memberCount > 1 && (
-                <span className="shrink-0 rounded bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">
+                <span className="shrink-0 rounded bg-info-bg px-2 py-0.5 text-xs font-medium text-info">
                   Совместный
                 </span>
               )}
             </div>
-            <p className="mt-1 text-sm text-zinc-500">
+            <p className="mt-1 text-sm text-muted">
               {list.itemCount === 0
                 ? "Нет задач"
                 : list.itemCount === 1
@@ -51,7 +51,7 @@ export function ListsSection({
               {list.memberCount > 1 && ` · ${list.memberCount} участника`}
             </p>
             {list.role !== "OWNER" && (
-              <p className="mt-1 text-xs text-zinc-400">{roleLabel(list.role)}</p>
+              <p className="mt-1 text-xs text-subtle">{roleLabel(list.role)}</p>
             )}
           </Link>
         </li>

@@ -8,14 +8,14 @@ export function LoginForm() {
 
   return (
     <form action={action} className="w-full max-w-md space-y-4">
-      <h1 className="text-2xl font-semibold">Вход в AIKeep</h1>
+      <h1 className="text-2xl font-semibold text-foreground">Вход в AIKeep</h1>
 
       {state?.error && (
-        <p className="rounded bg-red-50 px-3 py-2 text-sm text-red-700">{state.error}</p>
+        <p className="rounded bg-danger-bg px-3 py-2 text-sm text-danger">{state.error}</p>
       )}
 
       <div className="space-y-1">
-        <label htmlFor="email" className="text-sm font-medium">
+        <label htmlFor="email" className="text-sm font-medium text-foreground">
           Email
         </label>
         <input
@@ -24,15 +24,16 @@ export function LoginForm() {
           type="email"
           required
           autoComplete="email"
-          className="w-full rounded border border-zinc-300 px-3 py-2"
+          placeholder="you@example.com"
+          className="w-full rounded border border-line-strong bg-surface px-3 py-2 text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
         />
         {state?.fieldErrors?.email && (
-          <p className="text-sm text-red-600">{state.fieldErrors.email.join(", ")}</p>
+          <p className="text-sm text-danger">{state.fieldErrors.email.join(", ")}</p>
         )}
       </div>
 
       <div className="space-y-1">
-        <label htmlFor="password" className="text-sm font-medium">
+        <label htmlFor="password" className="text-sm font-medium text-foreground">
           Пароль
         </label>
         <input
@@ -41,24 +42,25 @@ export function LoginForm() {
           type="password"
           required
           autoComplete="current-password"
-          className="w-full rounded border border-zinc-300 px-3 py-2"
+          placeholder="••••••••"
+          className="w-full rounded border border-line-strong bg-surface px-3 py-2 text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
         />
         {state?.fieldErrors?.password && (
-          <p className="text-sm text-red-600">{state.fieldErrors.password.join(", ")}</p>
+          <p className="text-sm text-danger">{state.fieldErrors.password.join(", ")}</p>
         )}
       </div>
 
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded bg-zinc-900 px-3 py-2 font-medium text-white disabled:opacity-50"
+        className="w-full rounded bg-brand px-3 py-2 font-medium text-foreground transition-colors hover:bg-brand-hover active:bg-brand-pressed disabled:bg-divider disabled:text-subtle disabled:hover:bg-divider"
       >
         {pending ? "Вход..." : "Войти"}
       </button>
 
-      <p className="text-sm text-zinc-600">
+      <p className="text-sm text-muted">
         Нет аккаунта?{" "}
-        <a className="text-zinc-900 underline" href="/register">
+        <a className="font-medium text-foreground underline" href="/register">
           Зарегистрироваться
         </a>
       </p>

@@ -3,27 +3,38 @@ import { logoutAction } from "@/actions/auth";
 
 export function AppHeader({ user }: { user: { displayName: string; role: string } }) {
   return (
-    <header className="flex flex-wrap items-center justify-between gap-3 border-b bg-white px-4 py-3 sm:px-6">
-      <Link href="/" className="text-lg font-semibold">
-        AIKeep
+    <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-surface px-4 py-3 sm:px-6">
+      <Link href="/" className="flex items-center gap-2">
+        <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand shadow-sm">
+          <span className="h-3 w-3 rounded-sm bg-foreground/80" aria-hidden="true" />
+        </span>
+        <span className="text-lg font-semibold text-foreground">AIKeep</span>
       </Link>
       <nav className="flex flex-wrap items-center gap-3 sm:gap-4">
-        <Link href="/" className="text-sm text-zinc-600 hover:underline">
+        <Link href="/" className="text-sm font-medium text-muted transition-colors hover:text-foreground">
           Главная
         </Link>
-        <Link href="/?tab=notes" className="text-sm text-zinc-600 hover:underline">
+        <Link
+          href="/?tab=notes"
+          className="text-sm font-medium text-muted transition-colors hover:text-foreground"
+        >
           Заметки
         </Link>
         {user.role === "ADMIN" && (
-          <Link href="/admin/invites" className="text-sm text-zinc-600 hover:underline">
+          <Link
+            href="/admin/invites"
+            className="text-sm font-medium text-muted transition-colors hover:text-foreground"
+          >
             Коды приглашений
           </Link>
         )}
-        <span className="text-sm text-zinc-600">{user.displayName}</span>
+        <span className="rounded-full bg-brand-soft px-2.5 py-0.5 text-sm font-medium text-foreground">
+          {user.displayName}
+        </span>
         <form action={logoutAction}>
           <button
             type="submit"
-            className="rounded bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white"
+            className="rounded border border-line-strong bg-surface px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:bg-hover-bg hover:text-foreground"
           >
             Выйти
           </button>

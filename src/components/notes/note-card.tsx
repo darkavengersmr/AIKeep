@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useActionState } from "react";
-import { noteCardClass } from "@/lib/note-colors";
+import { noteCardClass, noteCardHoverClass } from "@/lib/note-colors";
 import type { NoteFormState } from "@/actions/notes";
 import { NoteColorPicker } from "./color-picker";
 import { useFormToast } from "@/components/ui/toast";
@@ -32,7 +32,10 @@ export function NoteCard({
 
   if (editing) {
     return (
-      <form action={updateFormAction} className={`rounded-lg border border-zinc-300 p-4 shadow-sm ${noteCardClass(note.color)}`}>
+      <form
+        action={updateFormAction}
+        className={`rounded-lg border border-line p-4 shadow-card ${noteCardClass(note.color)}`}
+      >
         <input type="hidden" name="id" value={note.id} />
         <div className="space-y-2">
           <input
@@ -40,20 +43,20 @@ export function NoteCard({
             type="text"
             defaultValue={note.title ?? ""}
             placeholder="Заголовок"
-            className="w-full rounded border border-zinc-300 px-3 py-2 text-sm"
+            className="w-full rounded border border-line-strong bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
           />
           <textarea
             name="content"
             rows={5}
             defaultValue={note.content ?? ""}
             placeholder="Текст заметки..."
-            className="w-full resize-none rounded border border-zinc-300 px-3 py-2 text-sm"
+            className="w-full resize-none rounded border border-line-strong bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
           />
           {updateState?.fieldErrors?.title && (
-            <p className="text-sm text-red-600">{updateState.fieldErrors.title.join(", ")}</p>
+            <p className="text-sm text-danger">{updateState.fieldErrors.title.join(", ")}</p>
           )}
           {updateState?.fieldErrors?.content && (
-            <p className="text-sm text-red-600">{updateState.fieldErrors.content.join(", ")}</p>
+            <p className="text-sm text-danger">{updateState.fieldErrors.content.join(", ")}</p>
           )}
           <div className="flex items-center gap-2">
             <NoteColorPicker name="color" value={note.color} />
@@ -63,19 +66,19 @@ export function NoteCard({
               <button
                 type="submit"
                 disabled={updatePending}
-                className="rounded bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white disabled:opacity-50"
+                className="rounded bg-brand px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-brand-hover active:bg-brand-pressed disabled:bg-divider disabled:text-subtle"
               >
                 {updatePending ? "Сохранение..." : "Сохранить"}
               </button>
               <button
                 type="button"
                 onClick={() => setEditing(false)}
-                className="rounded border border-zinc-300 px-3 py-1.5 text-sm"
+                className="rounded border border-line-strong bg-surface px-3 py-1.5 text-sm text-muted transition-colors hover:bg-hover-bg hover:text-foreground"
               >
                 Отмена
               </button>
             </div>
-            {updateState?.error && <p className="text-sm text-red-600">{updateState.error}</p>}
+            {updateState?.error && <p className="text-sm text-danger">{updateState.error}</p>}
           </div>
         </div>
       </form>
@@ -83,16 +86,18 @@ export function NoteCard({
   }
 
   return (
-    <div className={`rounded-lg border border-zinc-300 p-4 shadow-sm ${noteCardClass(note.color)}`}>
-      <h3 className="font-semibold">{note.title?.trim() || "Без названия"}</h3>
+    <div
+      className={`rounded-lg border border-line p-4 shadow-card transition-colors ${noteCardClass(note.color)} ${noteCardHoverClass(note.color)}`}
+    >
+      <h3 className="font-semibold text-foreground">{note.title?.trim() || "Без названия"}</h3>
       {note.content && (
-        <p className="mt-1 whitespace-pre-wrap text-sm text-zinc-700">{note.content}</p>
+        <p className="mt-1 whitespace-pre-wrap text-sm text-foreground/90">{note.content}</p>
       )}
       <div className="mt-3 flex items-center gap-2">
         <button
           type="button"
           onClick={() => setEditing(true)}
-          className="rounded border border-zinc-300 px-3 py-1.5 text-sm"
+          className="rounded border border-line-strong bg-surface px-3 py-1.5 text-sm text-muted transition-colors hover:bg-hover-bg hover:text-foreground"
         >
           Изменить
         </button>
@@ -106,13 +111,13 @@ export function NoteCard({
                 event.preventDefault();
               }
             }}
-            className="rounded border border-red-200 px-3 py-1.5 text-sm text-red-700 hover:bg-red-50 disabled:opacity-50"
+            className="rounded border border-danger/30 px-3 py-1.5 text-sm text-danger transition-colors hover:bg-danger-bg disabled:opacity-50"
           >
             Удалить
           </button>
         </form>
       </div>
-      {deleteState?.error && <p className="mt-1 text-sm text-red-600">{deleteState.error}</p>}
+      {deleteState?.error && <p className="mt-1 text-sm text-danger">{deleteState.error}</p>}
     </div>
   );
 }

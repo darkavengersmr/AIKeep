@@ -8,14 +8,14 @@ export function RegisterForm() {
 
   return (
     <form action={action} className="w-full max-w-md space-y-4">
-      <h1 className="text-2xl font-semibold">Регистрация</h1>
+      <h1 className="text-2xl font-semibold text-foreground">Регистрация</h1>
 
       {state?.error && (
-        <p className="rounded bg-red-50 px-3 py-2 text-sm text-red-700">{state.error}</p>
+        <p className="rounded bg-danger-bg px-3 py-2 text-sm text-danger">{state.error}</p>
       )}
 
       <div className="space-y-1">
-        <label htmlFor="displayName" className="text-sm font-medium">
+        <label htmlFor="displayName" className="text-sm font-medium text-foreground">
           Имя
         </label>
         <input
@@ -24,15 +24,16 @@ export function RegisterForm() {
           type="text"
           required
           autoComplete="name"
-          className="w-full rounded border border-zinc-300 px-3 py-2"
+          placeholder="Как к вам обращаться"
+          className="w-full rounded border border-line-strong bg-surface px-3 py-2 text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
         />
         {state?.fieldErrors?.displayName && (
-          <p className="text-sm text-red-600">{state.fieldErrors.displayName.join(", ")}</p>
+          <p className="text-sm text-danger">{state.fieldErrors.displayName.join(", ")}</p>
         )}
       </div>
 
       <div className="space-y-1">
-        <label htmlFor="email" className="text-sm font-medium">
+        <label htmlFor="email" className="text-sm font-medium text-foreground">
           Email
         </label>
         <input
@@ -41,15 +42,16 @@ export function RegisterForm() {
           type="email"
           required
           autoComplete="email"
-          className="w-full rounded border border-zinc-300 px-3 py-2"
+          placeholder="you@example.com"
+          className="w-full rounded border border-line-strong bg-surface px-3 py-2 text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
         />
         {state?.fieldErrors?.email && (
-          <p className="text-sm text-red-600">{state.fieldErrors.email.join(", ")}</p>
+          <p className="text-sm text-danger">{state.fieldErrors.email.join(", ")}</p>
         )}
       </div>
 
       <div className="space-y-1">
-        <label htmlFor="password" className="text-sm font-medium">
+        <label htmlFor="password" className="text-sm font-medium text-foreground">
           Пароль
         </label>
         <input
@@ -58,15 +60,16 @@ export function RegisterForm() {
           type="password"
           required
           autoComplete="new-password"
-          className="w-full rounded border border-zinc-300 px-3 py-2"
+          placeholder="Минимум 8 символов"
+          className="w-full rounded border border-line-strong bg-surface px-3 py-2 text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
         />
         {state?.fieldErrors?.password && (
-          <p className="text-sm text-red-600">{state.fieldErrors.password.join(", ")}</p>
+          <p className="text-sm text-danger">{state.fieldErrors.password.join(", ")}</p>
         )}
       </div>
 
       <div className="space-y-1">
-        <label htmlFor="code" className="text-sm font-medium">
+        <label htmlFor="code" className="text-sm font-medium text-foreground">
           Код приглашения
         </label>
         <input
@@ -75,24 +78,25 @@ export function RegisterForm() {
           type="text"
           required
           autoComplete="off"
-          className="w-full rounded border border-zinc-300 px-3 py-2"
+          placeholder="XXXX-XXXX"
+          className="w-full rounded border border-line-strong bg-surface px-3 py-2 text-foreground placeholder:text-subtle focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
         />
         {state?.fieldErrors?.code && (
-          <p className="text-sm text-red-600">{state.fieldErrors.code.join(", ")}</p>
+          <p className="text-sm text-danger">{state.fieldErrors.code.join(", ")}</p>
         )}
       </div>
 
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded bg-zinc-900 px-3 py-2 font-medium text-white disabled:opacity-50"
+        className="w-full rounded bg-brand px-3 py-2 font-medium text-foreground transition-colors hover:bg-brand-hover active:bg-brand-pressed disabled:bg-divider disabled:text-subtle disabled:hover:bg-divider"
       >
         {pending ? "Регистрация..." : "Создать аккаунт"}
       </button>
 
-      <p className="text-sm text-zinc-600">
+      <p className="text-sm text-muted">
         Уже есть аккаунт?{" "}
-        <a className="text-zinc-900 underline" href="/login">
+        <a className="font-medium text-foreground underline" href="/login">
           Войти
         </a>
       </p>

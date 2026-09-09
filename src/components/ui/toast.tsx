@@ -72,8 +72,8 @@ function ToastItemView({ toast, onClose }: { toast: ToastItem; onClose: () => vo
       role="status"
       className={`pointer-events-auto flex items-center gap-3 rounded-lg border px-4 py-3 text-sm shadow-lg ${
         toast.kind === "success"
-          ? "border-green-200 bg-green-50 text-green-800"
-          : "border-red-200 bg-red-50 text-red-800"
+          ? "border-success/30 bg-success-bg text-success-strong"
+          : "border-danger/30 bg-danger-bg text-danger"
       }`}
     >
       <span className="flex-1">{toast.message}</span>

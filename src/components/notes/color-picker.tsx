@@ -26,7 +26,7 @@ export function NoteColorPicker({
             aria-label={color.label}
             aria-pressed={isSelected}
             onClick={() => setSelected(swatchValue)}
-            className={`h-6 w-6 rounded-full ${color.swatchClass} ${isSelected ? "ring-2 ring-offset-1 ring-zinc-900" : ""}`}
+            className={`h-6 w-6 rounded-full ${color.swatchClass} ${isSelected ? "ring-2 ring-offset-1 ring-foreground" : ""}`}
           />
         );
       })}
