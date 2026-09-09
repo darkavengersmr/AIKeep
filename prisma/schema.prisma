@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum MemberRole {
+  OWNER
+  EDITOR
+  VIEWER
+}
+
+model User {
+  id           String   @id @default(uuid(4))
+  email        String   @unique
+  passwordHash String
+  displayName  String
+  role         UserRole @default(USER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  notes            Note[]
+  sessions         Session[]
+  memberships      TodoListMember[]
+  createdInvites   InvitationCode[]
+}
+
+model Session {
+  id         String   @id @default(uuid(4))
+  tokenHash  String   @unique
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  lastUsedAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model InvitationCode {
+  id          String    @id @default(uuid(4))
+  code        String    @unique
+  isActive    Boolean   @default(true)
+  maxUses     Int?
+  useCount    Int       @default(0)
+  expiresAt   DateTime?
+  createdById String?
+  createdBy   User?     @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  createdAt   DateTime  @default(now())
+}
+
+model Note {
+  id         String    @id @default(uuid(4))
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title      String?
+  content    String?
+  color      String?
+  isPinned   Boolean   @default(false)
+  isArchived Boolean   @default(false)
+  deletedAt  DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([userId, deletedAt, isPinned, updatedAt])
+}
+
+model TodoList {
+  id        String   @id @default(uuid(4))
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  items   TodoItem[]
+  members TodoListMember[]
+}
+
+model TodoItem {
+  id        String   @id @default(uuid(4))
+  listId    String
+  list      TodoList @relation(fields: [listId], references: [id], onDelete: Cascade)
+  text      String
+  isDone    Boolean  @default(false)
+  position  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([listId, position])
+}
+
+model TodoListMember {
+  id        String     @id @default(uuid(4))
+  listId    String
+  list      TodoList   @relation(fields: [listId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      MemberRole
+  createdAt DateTime   @default(now())
+
+  @@unique([listId, userId])
+  @@index([userId])
+}
