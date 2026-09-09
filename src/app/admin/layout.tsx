@@ -1,8 +1,8 @@
-import { requireAuth } from "@/lib/auth";
+import { requireAdmin } from "@/lib/auth";
 import { AppHeader } from "@/components/layout/app-header";
 
-export default async function MainLayout({ children }: LayoutProps<"/">) {
-  const user = await requireAuth();
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const user = await requireAdmin();
 
   return (
     <div className="flex min-h-screen flex-col">

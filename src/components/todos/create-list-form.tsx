@@ -2,9 +2,11 @@
 
 import { useActionState } from "react";
 import { createListAction } from "@/actions/todos";
+import { useFormToast } from "@/components/ui/toast";
 
 export function CreateListForm() {
   const [state, action, pending] = useActionState(createListAction, undefined);
+  useFormToast(state);
 
   return (
     <form action={action} className="rounded-lg border border-zinc-300 bg-white p-4 shadow-sm">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ListSummary } from "@/server/todos/service";
+import { EmptyState } from "@/components/ui/empty-state";
 
 function roleLabel(role: ListSummary["role"]): string {
   switch (role) {
@@ -12,13 +13,17 @@ function roleLabel(role: ListSummary["role"]): string {
   }
 }
 
-export function ListsSection({ lists }: { lists: ListSummary[] }) {
+export function ListsSection({
+  lists,
+  emptyTitle = "Списков пока нет",
+  emptyDescription = "Создайте первый список, и он появится здесь.",
+}: {
+  lists: ListSummary[];
+  emptyTitle?: string;
+  emptyDescription?: string;
+}) {
   if (lists.length === 0) {
-    return (
-      <p className="text-zinc-500">
-        Пока нет списков. Создайте первый список выше.
-      </p>
-    );
+    return <EmptyState title={emptyTitle} description={emptyDescription} />;
   }
 
   return (

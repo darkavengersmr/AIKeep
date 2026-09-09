@@ -25,6 +25,7 @@ import {
 } from "@/server/todos/service";
 
 export type TodoFormState = {
+  success?: string;
   error?: string;
   fieldErrors?: Record<string, string[]>;
 } | undefined;
@@ -56,6 +57,7 @@ export async function createListAction(
   }
 
   revalidatePath("/");
+  return { success: "Список создан" };
 }
 
 export async function updateListAction(
@@ -82,6 +84,7 @@ export async function updateListAction(
 
   revalidatePath("/");
   revalidatePath(`/lists/${parsed.data.id}`);
+  return { success: "Список переименован" };
 }
 
 export async function deleteListAction(
@@ -126,6 +129,7 @@ export async function addItemAction(
   }
 
   revalidatePath(`/lists/${parsed.data.listId}`);
+  return { success: "Задача добавлена" };
 }
 
 export async function updateItemAction(
@@ -145,6 +149,7 @@ export async function updateItemAction(
   try {
     const item = await updateItem(user.id, parsed.data.id, { text: parsed.data.text });
     revalidatePath(`/lists/${item.listId}`);
+    return { success: "Задача обновлена" };
   } catch (error) {
     return formError(error);
   }
@@ -176,6 +181,7 @@ export async function deleteItemAction(
   try {
     const item = await deleteItem(user.id, parsed.data);
     revalidatePath(`/lists/${item.listId}`);
+    return { success: "Задача удалена" };
   } catch (error) {
     return formError(error);
   }

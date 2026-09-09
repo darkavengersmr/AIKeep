@@ -3,9 +3,11 @@
 import { useActionState } from "react";
 import { createNoteAction } from "@/actions/notes";
 import { NoteColorPicker } from "./color-picker";
+import { useFormToast } from "@/components/ui/toast";
 
 export function CreateNoteForm() {
   const [state, action, pending] = useActionState(createNoteAction, undefined);
+  useFormToast(state);
 
   return (
     <form action={action} className="rounded-lg border border-zinc-300 bg-white p-4 shadow-sm">

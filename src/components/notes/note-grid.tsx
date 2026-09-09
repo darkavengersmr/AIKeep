@@ -1,13 +1,15 @@
 import type { Note } from "@prisma/client";
 import { updateNoteAction, deleteNoteAction } from "@/actions/notes";
 import { NoteCard } from "./note-card";
+import { EmptyState } from "@/components/ui/empty-state";
 
 export function NoteGrid({ notes }: { notes: Note[] }) {
   if (notes.length === 0) {
     return (
-      <p className="text-zinc-500">
-        Пока нет заметок. Создайте первую заметку выше.
-      </p>
+      <EmptyState
+        title="Заметок пока нет"
+        description="Создайте первую заметку — она появится здесь."
+      />
     );
   }
 

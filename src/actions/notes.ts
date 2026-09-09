@@ -7,6 +7,7 @@ import { noteCreateSchema, noteUpdateSchema, noteIdSchema } from "@/server/valid
 import { createNote, updateNote, deleteNote } from "@/server/notes/service";
 
 export type NoteFormState = {
+  success?: string;
   error?: string;
   fieldErrors?: Record<string, string[]>;
 } | undefined;
@@ -53,6 +54,7 @@ export async function createNoteAction(
   }
 
   refreshNotes();
+  return { success: "Заметка создана" };
 }
 
 export async function updateNoteAction(
@@ -82,6 +84,7 @@ export async function updateNoteAction(
   }
 
   refreshNotes();
+  return { success: "Заметка обновлена" };
 }
 
 export async function deleteNoteAction(
@@ -102,4 +105,5 @@ export async function deleteNoteAction(
   }
 
   refreshNotes();
+  return { success: "Заметка удалена" };
 }

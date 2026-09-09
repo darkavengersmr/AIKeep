@@ -11,6 +11,7 @@ import {
 import { reorderItemsAction } from "@/actions/todos";
 import { TodoItemRow } from "./todo-item-row";
 import { MembersPanel } from "./members-panel";
+import { useFormToast } from "@/components/ui/toast";
 
 export function ListDetail({
   list,
@@ -32,6 +33,9 @@ export function ListDetail({
     undefined,
   );
   const [transitionPending, startTransition] = useTransition();
+  useFormToast(addState);
+  useFormToast(updateListState);
+  useFormToast(deleteListState);
 
   const sortedItems = [...list.items].sort((a, b) => a.position - b.position);
 

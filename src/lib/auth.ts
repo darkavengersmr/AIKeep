@@ -15,6 +15,12 @@ export async function requireAuth() {
   return user;
 }
 
+export async function requireAdmin() {
+  const user = await requireAuth();
+  if (user.role !== "ADMIN") redirect("/");
+  return user;
+}
+
 export async function setSessionCookie(token: string) {
   const cookieStore = await cookies();
   cookieStore.set(SESSION_COOKIE, token, {

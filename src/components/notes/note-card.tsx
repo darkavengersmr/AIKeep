@@ -4,6 +4,7 @@ import { useState, useActionState } from "react";
 import { noteCardClass } from "@/lib/note-colors";
 import type { NoteFormState } from "@/actions/notes";
 import { NoteColorPicker } from "./color-picker";
+import { useFormToast } from "@/components/ui/toast";
 
 type NoteData = {
   id: string;
@@ -26,6 +27,8 @@ export function NoteCard({
   const [editing, setEditing] = useState(false);
   const [updateState, updateFormAction, updatePending] = useActionState(updateAction, undefined);
   const [deleteState, deleteFormAction, deletePending] = useActionState(deleteAction, undefined);
+  useFormToast(updateState);
+  useFormToast(deleteState);
 
   if (editing) {
     return (

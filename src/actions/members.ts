@@ -15,6 +15,7 @@ import {
 } from "@/server/members/service";
 
 export type MembersFormState = {
+  success?: string;
   error?: string;
   fieldErrors?: Record<string, string[]>;
 } | undefined;
@@ -47,6 +48,7 @@ export async function addMemberAction(
   }
 
   revalidatePath(`/lists/${parsed.data.listId}`);
+  return { success: "Участник добавлен" };
 }
 
 export async function removeMemberAction(
@@ -70,6 +72,7 @@ export async function removeMemberAction(
   }
 
   revalidatePath(`/lists/${parsed.data.listId}`);
+  return { success: "Участник удалён" };
 }
 
 export async function changeMemberRoleAction(
@@ -99,4 +102,5 @@ export async function changeMemberRoleAction(
   }
 
   revalidatePath(`/lists/${parsed.data.listId}`);
+  return { success: "Роль участника изменена" };
 }

@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import type { ListMember } from "@/server/members/service";
 import { addMemberAction, removeMemberAction } from "@/actions/members";
+import { useFormToast } from "@/components/ui/toast";
 
 const ROLE_LABELS: Record<ListMember["role"], string> = {
   OWNER: "Владелец",
@@ -20,6 +21,7 @@ export function MembersPanel({
   canManage: boolean;
 }) {
   const [addState, addAction, addPending] = useActionState(addMemberAction, undefined);
+  useFormToast(addState);
 
   return (
     <section className="mt-8" aria-label="Участники списка">
@@ -74,6 +76,7 @@ function MemberRow({
 }) {
   const [removeState, removeAction, removePending] = useActionState(removeMemberAction, undefined);
   const isOwner = member.role === "OWNER";
+  useFormToast(removeState);
 
   return (
     <li className="flex items-center justify-between gap-3">

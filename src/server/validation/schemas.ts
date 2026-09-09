@@ -107,3 +107,39 @@ export const changeMemberRoleSchema = z.object({
 export type AddMemberInput = z.infer<typeof addMemberSchema>;
 export type RemoveMemberInput = z.infer<typeof removeMemberSchema>;
 export type ChangeMemberRoleInput = z.infer<typeof changeMemberRoleSchema>;
+
+export const invitationCodeSchema = z
+  .string()
+  .trim()
+  .min(6, "Код минимум 6 символов")
+  .max(20, "Код максимум 20 символов")
+  .regex(/^[a-zA-Z0-9-]+$/, "Код может содержать только буквы, цифры и дефис");
+
+export const invitationMaxUsesSchema = z
+  .number()
+  .int("Лимит должен быть целым числом")
+  .positive("Лимит должен быть больше нуля")
+  .nullable()
+  .optional();
+
+export const invitationExpiresAtSchema = z
+  .date()
+  .refine((value) => value > new Date(), "Срок действия должен быть в будущем")
+  .nullable()
+  .optional();
+
+export const createInvitationCodeSchema = z.object({
+  code: invitationCodeSchema.optional(),
+  maxUses: invitationMaxUsesSchema,
+  expiresAt: invitationExpiresAtSchema,
+});
+
+export const toggleInvitationCodeSchema = z.object({
+  id: idSchema,
+});
+
+export const deleteInvitationCodeSchema = z.object({
+  id: idSchema,
+});
+
+export type CreateInvitationCodeInput = z.infer<typeof createInvitationCodeSchema>;

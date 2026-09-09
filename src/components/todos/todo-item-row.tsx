@@ -4,6 +4,7 @@ import { useState, useActionState, useTransition } from "react";
 import type { TodoItem } from "@prisma/client";
 import { updateItemAction, deleteItemAction } from "@/actions/todos";
 import { toggleItemAction } from "@/actions/todos";
+import { useFormToast } from "@/components/ui/toast";
 
 export function TodoItemRow({
   item,
@@ -24,6 +25,8 @@ export function TodoItemRow({
   const [updateState, updateFormAction, updatePending] = useActionState(updateItemAction, undefined);
   const [deleteState, deleteFormAction, deletePending] = useActionState(deleteItemAction, undefined);
   const [transitionPending, startTransition] = useTransition();
+  useFormToast(updateState);
+  useFormToast(deleteState);
 
   const handleToggle = () => {
     startTransition(async () => {
