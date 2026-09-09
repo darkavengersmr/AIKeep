@@ -11,7 +11,13 @@ export default async function MainLayout({ children }: LayoutProps<"/">) {
         <Link href="/" className="text-lg font-semibold">
           AIKeep
         </Link>
-        <div className="flex items-center gap-4">
+        <nav className="flex items-center gap-4">
+          <Link href="/" className="text-sm text-zinc-600 hover:underline">
+            Главная
+          </Link>
+          <Link href="/notes" className="text-sm text-zinc-600 hover:underline">
+            Заметки
+          </Link>
           <span className="text-sm text-zinc-600">{user.displayName}</span>
           <form action={logoutAction}>
             <button
@@ -21,7 +27,7 @@ export default async function MainLayout({ children }: LayoutProps<"/">) {
               Выйти
             </button>
           </form>
-        </div>
+        </nav>
       </header>
       <main className="flex-1 px-6 py-8">{children}</main>
     </div>
