@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { logoutAction } from "@/actions/auth";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 export function AppHeader({ user }: { user: { displayName: string; role: string } }) {
   return (
-    <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-surface px-4 py-3 sm:px-6">
+    <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-header px-4 py-3 sm:px-6">
       <Link href="/" className="flex items-center gap-2">
         <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand shadow-sm">
           <span className="h-3 w-3 rounded-sm bg-foreground/80" aria-hidden="true" />
@@ -31,6 +32,7 @@ export function AppHeader({ user }: { user: { displayName: string; role: string 
         <span className="rounded-full bg-brand-soft px-2.5 py-0.5 text-sm font-medium text-foreground">
           {user.displayName}
         </span>
+        <ThemeToggle />
         <form action={logoutAction}>
           <button
             type="submit"

@@ -81,7 +81,7 @@ function ToastItemView({ toast, onClose }: { toast: ToastItem; onClose: () => vo
         type="button"
         onClick={onClose}
         aria-label="Закрыть"
-        className="rounded px-2 text-xs hover:bg-black/5"
+        className="rounded px-2 text-xs hover:bg-black/5 dark:hover:bg-white/10"
       >
         ✕
       </button>

@@ -1,81 +1,214 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  color-scheme: light;
+
+  /* Base palette (Google Keep style) */
+  --bg-background: #f8f9fa;
+  --bg-surface: #ffffff;
+  --bg-header: #ffffff;
+  --bg-foreground: #202124;
+  --bg-muted: #5f6368;
+  --bg-subtle: #9aa0a6;
+  --bg-hover-bg: #f1f3f4;
+  --bg-line: #e0e3e7;
+  --bg-line-strong: #dadce0;
+  --bg-divider: #e8eaed;
+
+  /* Brand yellow */
+  --bg-brand: #f9c74f;
+  --bg-brand-hover: #f6b93b;
+  --bg-brand-pressed: #e9a928;
+  --bg-brand-soft: #fff4cc;
+  --bg-brand-decor: #fff8e1;
+  --bg-brand-dark: #d99a00;
+
+  /* Note colors */
+  --bg-note-yellow: #fff4b8;
+  --bg-note-yellow-hover: #ffee91;
+  --bg-note-green: #d7f5d0;
+  --bg-note-green-hover: #c4edba;
+  --bg-note-blue: #d9f0ff;
+  --bg-note-blue-hover: #c5e8fc;
+  --bg-note-purple: #e9d7ff;
+  --bg-note-purple-hover: #dfc8fa;
+  --bg-note-pink: #ffd9e2;
+  --bg-note-pink-hover: #ffc7d4;
+  --bg-note-orange: #ffe0b2;
+  --bg-note-orange-hover: #ffd19a;
+
+  /* Todo lists */
+  --bg-todo-text: #3c4043;
+  --bg-checkbox-line: #9aa0a6;
+  --bg-checkbox-hover-bg: #fff8e1;
+
+  /* Status */
+  --bg-success: #137333;
+  --bg-success-strong: #0d652d;
+  --bg-success-bg: #e6f4ea;
+  --bg-danger: #d93025;
+  --bg-danger-bg: #fce8e6;
+  --bg-warning: #b06000;
+  --bg-warning-bg: #fef7e0;
+  --bg-info: #1967d2;
+  --bg-info-bg: #e8f0fe;
+
+  /* Tags / categories */
+  --bg-tag-work-bg: #d9f0ff;
+  --bg-tag-work: #1967d2;
+  --bg-tag-personal-bg: #e9d7ff;
+  --bg-tag-personal: #8430ce;
+  --bg-tag-important-bg: #ffd9e2;
+  --bg-tag-important: #c5221f;
+  --bg-tag-ideas-bg: #fff4b8;
+  --bg-tag-ideas: #b06000;
+  --bg-tag-study-bg: #d7f5d0;
+  --bg-tag-study: #137333;
+  --bg-tag-shopping-bg: #ffe0b2;
+  --bg-tag-shopping: #b06000;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Base palette (dark) */
+  --bg-background: #202124;
+  --bg-surface: #303134;
+  --bg-header: #292a2d;
+  --bg-foreground: #e8eaed;
+  --bg-muted: #bdc1c6;
+  --bg-subtle: #9aa0a6;
+  --bg-hover-bg: #3c4043;
+  --bg-line: #5f6368;
+  --bg-line-strong: #5f6368;
+  --bg-divider: #3c4043;
+
+  /* Brand yellow */
+  --bg-brand: #f9c74f;
+  --bg-brand-hover: #f6b93b;
+  --bg-brand-pressed: #e9a928;
+  --bg-brand-soft: rgba(249, 199, 79, 0.16);
+  --bg-brand-decor: rgba(249, 199, 79, 0.1);
+  --bg-brand-dark: #f9c74f;
+
+  /* Note colors (muted) */
+  --bg-note-yellow: #665f2b;
+  --bg-note-yellow-hover: #7a6f33;
+  --bg-note-green: #3d5a40;
+  --bg-note-green-hover: #4a6b4e;
+  --bg-note-blue: #35576b;
+  --bg-note-blue-hover: #416a82;
+  --bg-note-purple: #55446b;
+  --bg-note-purple-hover: #675387;
+  --bg-note-pink: #6b3e4a;
+  --bg-note-pink-hover: #814b59;
+  --bg-note-orange: #6b5134;
+  --bg-note-orange-hover: #82633f;
+
+  /* Todo lists */
+  --bg-todo-text: #e8eaed;
+  --bg-checkbox-line: #bdc1c6;
+  --bg-checkbox-hover-bg: #665f2b;
+
+  /* Status */
+  --bg-success: #81c995;
+  --bg-success-strong: #81c995;
+  --bg-success-bg: rgba(129, 201, 149, 0.12);
+  --bg-danger: #f28b82;
+  --bg-danger-bg: rgba(242, 139, 130, 0.12);
+  --bg-warning: #fdd663;
+  --bg-warning-bg: rgba(253, 214, 99, 0.12);
+  --bg-info: #8ab4f8;
+  --bg-info-bg: rgba(138, 180, 248, 0.12);
+
+  /* Tags / categories */
+  --bg-tag-work-bg: rgba(138, 180, 248, 0.12);
+  --bg-tag-work: #8ab4f8;
+  --bg-tag-personal-bg: rgba(197, 166, 240, 0.12);
+  --bg-tag-personal: #c58af9;
+  --bg-tag-important-bg: rgba(242, 139, 130, 0.12);
+  --bg-tag-important: #f28b82;
+  --bg-tag-ideas-bg: rgba(253, 214, 99, 0.12);
+  --bg-tag-ideas: #fdd663;
+  --bg-tag-study-bg: rgba(129, 201, 149, 0.12);
+  --bg-tag-study: #81c995;
+  --bg-tag-shopping-bg: rgba(253, 214, 99, 0.12);
+  --bg-tag-shopping: #fdd663;
+}
+
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-background: var(--bg-background);
+  --color-surface: var(--bg-surface);
+  --color-header: var(--bg-header);
+  --color-foreground: var(--bg-foreground);
+  --color-muted: var(--bg-muted);
+  --color-subtle: var(--bg-subtle);
+  --color-hover-bg: var(--bg-hover-bg);
+  --color-line: var(--bg-line);
+  --color-line-strong: var(--bg-line-strong);
+  --color-divider: var(--bg-divider);
+
+  --color-brand: var(--bg-brand);
+  --color-brand-hover: var(--bg-brand-hover);
+  --color-brand-pressed: var(--bg-brand-pressed);
+  --color-brand-soft: var(--bg-brand-soft);
+  --color-brand-decor: var(--bg-brand-decor);
+  --color-brand-dark: var(--bg-brand-dark);
+
+  --color-note-yellow: var(--bg-note-yellow);
+  --color-note-yellow-hover: var(--bg-note-yellow-hover);
+  --color-note-green: var(--bg-note-green);
+  --color-note-green-hover: var(--bg-note-green-hover);
+  --color-note-blue: var(--bg-note-blue);
+  --color-note-blue-hover: var(--bg-note-blue-hover);
+  --color-note-purple: var(--bg-note-purple);
+  --color-note-purple-hover: var(--bg-note-purple-hover);
+  --color-note-pink: var(--bg-note-pink);
+  --color-note-pink-hover: var(--bg-note-pink-hover);
+  --color-note-orange: var(--bg-note-orange);
+  --color-note-orange-hover: var(--bg-note-orange-hover);
+
+  --color-todo-text: var(--bg-todo-text);
+  --color-checkbox-line: var(--bg-checkbox-line);
+  --color-checkbox-hover-bg: var(--bg-checkbox-hover-bg);
+
+  --color-success: var(--bg-success);
+  --color-success-strong: var(--bg-success-strong);
+  --color-success-bg: var(--bg-success-bg);
+  --color-danger: var(--bg-danger);
+  --color-danger-bg: var(--bg-danger-bg);
+  --color-warning: var(--bg-warning);
+  --color-warning-bg: var(--bg-warning-bg);
+  --color-info: var(--bg-info);
+  --color-info-bg: var(--bg-info-bg);
+
+  --color-tag-work-bg: var(--bg-tag-work-bg);
+  --color-tag-work: var(--bg-tag-work);
+  --color-tag-personal-bg: var(--bg-tag-personal-bg);
+  --color-tag-personal: var(--bg-tag-personal);
+  --color-tag-important-bg: var(--bg-tag-important-bg);
+  --color-tag-important: var(--bg-tag-important);
+  --color-tag-ideas-bg: var(--bg-tag-ideas-bg);
+  --color-tag-ideas: var(--bg-tag-ideas);
+  --color-tag-study-bg: var(--bg-tag-study-bg);
+  --color-tag-study: var(--bg-tag-study);
+  --color-tag-shopping-bg: var(--bg-tag-shopping-bg);
+  --color-tag-shopping: var(--bg-tag-shopping);
 }
 
 @theme {
-  /* Base palette (Google Keep style) */
-  --color-background: #f8f9fa;
-  --color-surface: #ffffff;
-  --color-foreground: #202124;
-  --color-muted: #5f6368;
-  --color-subtle: #9aa0a6;
-  --color-hover-bg: #f1f3f4;
-  --color-line: #e0e3e7;
-  --color-line-strong: #dadce0;
-  --color-divider: #e8eaed;
-
-  /* Brand yellow */
-  --color-brand: #f9c74f;
-  --color-brand-hover: #f6b93b;
-  --color-brand-pressed: #e9a928;
-  --color-brand-soft: #fff4cc;
-  --color-brand-decor: #fff8e1;
-  --color-brand-dark: #d99a00;
-
-  /* Note colors */
-  --color-note-yellow: #fff4b8;
-  --color-note-yellow-hover: #ffee91;
-  --color-note-green: #d7f5d0;
-  --color-note-green-hover: #c4edba;
-  --color-note-blue: #d9f0ff;
-  --color-note-blue-hover: #c5e8fc;
-  --color-note-purple: #e9d7ff;
-  --color-note-purple-hover: #dfc8fa;
-  --color-note-pink: #ffd9e2;
-  --color-note-pink-hover: #ffc7d4;
-  --color-note-orange: #ffe0b2;
-  --color-note-orange-hover: #ffd19a;
-
-  /* Todo lists */
-  --color-todo-text: #3c4043;
-  --color-checkbox-line: #9aa0a6;
-  --color-checkbox-hover-bg: #fff8e1;
-
-  /* Status */
-  --color-success: #137333;
-  --color-success-strong: #0d652d;
-  --color-success-bg: #e6f4ea;
-  --color-danger: #d93025;
-  --color-danger-bg: #fce8e6;
-  --color-warning: #b06000;
-  --color-warning-bg: #fef7e0;
-  --color-info: #1967d2;
-  --color-info-bg: #e8f0fe;
-
-  /* Tags / categories */
-  --color-tag-work-bg: #d9f0ff;
-  --color-tag-work: #1967d2;
-  --color-tag-personal-bg: #e9d7ff;
-  --color-tag-personal: #8430ce;
-  --color-tag-important-bg: #ffd9e2;
-  --color-tag-important: #c5221f;
-  --color-tag-ideas-bg: #fff4b8;
-  --color-tag-ideas: #b06000;
-  --color-tag-study-bg: #d7f5d0;
-  --color-tag-study: #137333;
-  --color-tag-shopping-bg: #ffe0b2;
-  --color-tag-shopping: #b06000;
-
   /* Shadows */
   --shadow-card: 0 1px 3px rgb(0 0 0 / 0.08);
   --shadow-fab: 0 2px 6px rgb(0 0 0 / 0.12);
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background: var(--bg-background);
+  color: var(--bg-foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
