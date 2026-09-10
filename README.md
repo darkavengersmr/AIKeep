@@ -43,6 +43,14 @@ AIKeep сочетает в себе два ключевых инструмент
 - Тост-уведомления об ошибках и успехе операций.
 - Адаптивный интерфейс в стиле Google Keep на Tailwind CSS v4.
 
+**Скриншоты**
+
+![Страница входа](screenshots/screenshot-auth.jpg)
+
+![Заметки](screenshots/screenshot-notes.jpg)
+
+![Совместный список задач](screenshots/screenshot-list.jpg)
+
 ## Технологический стек
 
 | Слой | Технология |

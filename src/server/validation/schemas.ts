@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { NOTE_COLORS } from "@/lib/note-colors";
 
 export const registerSchema = z.object({
   displayName: z.string().trim().min(3, "Имя минимум 3 символа").max(50, "Имя максимум 50 символов"),
@@ -15,13 +16,11 @@ export const loginSchema = z.object({
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 
-export const noteColorSchema = z.enum([
-  "#fef3c7",
-  "#d1fadf",
-  "#dbeafe",
-  "#fce7f3",
-  "#e5e7eb",
-]);
+const noteColorValues = NOTE_COLORS.map((color) => color.value).filter(
+  (v): v is string => v !== null
+);
+
+export const noteColorSchema = z.enum(noteColorValues as [string, ...string[]]);
 
 export const noteCreateSchema = z.object({
   title: z.string().trim().max(200, "Заголовок максимум 200 символов").nullable().optional(),
